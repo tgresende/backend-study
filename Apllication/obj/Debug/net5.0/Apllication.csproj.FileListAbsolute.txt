@@ -1,0 +1,12 @@
+/Users/mac/Desktop/projects/Apllication/bin/Debug/net5.0/Apllication.deps.json
+/Users/mac/Desktop/projects/Apllication/bin/Debug/net5.0/Apllication.dll
+/Users/mac/Desktop/projects/Apllication/bin/Debug/net5.0/ref/Apllication.dll
+/Users/mac/Desktop/projects/Apllication/bin/Debug/net5.0/Apllication.pdb
+/Users/mac/Desktop/projects/Apllication/obj/Debug/net5.0/Apllication.csproj.AssemblyReference.cache
+/Users/mac/Desktop/projects/Apllication/obj/Debug/net5.0/Apllication.GeneratedMSBuildEditorConfig.editorconfig
+/Users/mac/Desktop/projects/Apllication/obj/Debug/net5.0/Apllication.AssemblyInfoInputs.cache
+/Users/mac/Desktop/projects/Apllication/obj/Debug/net5.0/Apllication.AssemblyInfo.cs
+/Users/mac/Desktop/projects/Apllication/obj/Debug/net5.0/Apllication.csproj.CoreCompileInputs.cache
+/Users/mac/Desktop/projects/Apllication/obj/Debug/net5.0/Apllication.dll
+/Users/mac/Desktop/projects/Apllication/obj/Debug/net5.0/ref/Apllication.dll
+/Users/mac/Desktop/projects/Apllication/obj/Debug/net5.0/Apllication.pdb
