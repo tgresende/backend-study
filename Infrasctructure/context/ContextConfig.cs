@@ -1,6 +1,7 @@
 
 using Microsoft.EntityFrameworkCore;
 using Domain.entities;
+using Infrasctructure.configurations;
 
 namespace Infrasctructure.context
 {
@@ -10,10 +11,14 @@ namespace Infrasctructure.context
         {
         }
         public DbSet<Project> Projects { get; set; }
+        public DbSet<Subject> Subjects { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
-               builder.Entity<Project>().HasKey(m => m.ProjectId);
-               base.OnModelCreating(builder);
+            ProjectConfiguration.Configure(builder);
+            SubjectConfiguration.Configure(builder);
+
+            base.OnModelCreating(builder);
         }
     }
 }
