@@ -1377,6 +1377,10 @@
         }
       },
       "Apllication/1.0.0": {
+        "dependencies": {
+          "Domain": "1.0.0",
+          "Infrasctructure": "1.0.0"
+        },
         "runtime": {
           "Apllication.dll": {}
         },

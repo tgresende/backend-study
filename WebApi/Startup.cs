@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Infrasctructure.context;
 using Microsoft.EntityFrameworkCore;
+using WebApi.DI;
 
 
 namespace WebApi
@@ -23,10 +24,13 @@ namespace WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             var connection = Configuration["ConexaoSqlite:SqliteConnectionString"];
-            services.AddDbContext<ContextConfig>(options =>
+            services.AddDbContext<Context>(options =>
                 options.UseSqlite(connection)
             );
-            // Add framework services.
+
+            DependencyInjection.RegisterServices(services);
+
+
             services.AddMvc();
             services.AddControllers();
             services.AddSwaggerGen(c =>
