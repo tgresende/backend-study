@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Infrasctructure.Migrations
 {
-    [DbContext(typeof(ContextConfig))]
+    [DbContext(typeof(Context))]
     [Migration("20220316235441_myMigration01")]
     partial class myMigration01
     {

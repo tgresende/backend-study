@@ -25,7 +25,14 @@
         "frameworks": {
           "net5.0": {
             "targetAlias": "net5.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "/Users/mac/Desktop/projects/Domain/Domain.csproj": {
+                "projectPath": "/Users/mac/Desktop/projects/Domain/Domain.csproj"
+              },
+              "/Users/mac/Desktop/projects/Infrasctructure/Infrasctructure.csproj": {
+                "projectPath": "/Users/mac/Desktop/projects/Infrasctructure/Infrasctructure.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
