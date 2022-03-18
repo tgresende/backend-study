@@ -10,3 +10,8 @@
 /Users/mac/Desktop/projects/Apllication/obj/Debug/net5.0/Apllication.dll
 /Users/mac/Desktop/projects/Apllication/obj/Debug/net5.0/ref/Apllication.dll
 /Users/mac/Desktop/projects/Apllication/obj/Debug/net5.0/Apllication.pdb
+/Users/mac/Desktop/projects/Apllication/bin/Debug/net5.0/Domain.dll
+/Users/mac/Desktop/projects/Apllication/bin/Debug/net5.0/Infrasctructure.dll
+/Users/mac/Desktop/projects/Apllication/bin/Debug/net5.0/Infrasctructure.pdb
+/Users/mac/Desktop/projects/Apllication/bin/Debug/net5.0/Domain.pdb
+/Users/mac/Desktop/projects/Apllication/obj/Debug/net5.0/Apllication.csproj.CopyComplete

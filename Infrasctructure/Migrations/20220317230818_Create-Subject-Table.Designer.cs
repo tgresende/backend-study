@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Infrasctructure.Migrations
 {
-    [DbContext(typeof(ContextConfig))]
+    [DbContext(typeof(Context))]
     [Migration("20220317230818_Create-Subject-Table")]
     partial class CreateSubjectTable
     {
