@@ -2,20 +2,20 @@ using Microsoft.AspNetCore.Mvc;
 using Apllication.useCases.subject.getSubjectUseCase;
 using System.Threading.Tasks;
 
-namespace WebApi.Controllers.subject
+namespace WebApi.Controllers.subject.GetSubjectsUseCase
 {
     [ApiController]
-    [Route("[controller]")]
-    public class GetSubjectUseCaseController : ControllerBase
+    [Route("api/[controller]")]
+    public class SubjectController : ControllerBase
     {
         private readonly IGetSubjectUseCase _useCase;
 
-        public GetSubjectUseCaseController(IGetSubjectUseCase useCase)
+        public SubjectController(IGetSubjectUseCase useCase)
         {
             _useCase = useCase;
         }
 
-        [HttpGet("GetSubjectsFromProject/{projectId}")]
+        [HttpGet("GetSubjects/{projectId}")]
          public async Task<IActionResult> Get(int projectId)
         {
             var data = await _useCase.Execute(projectId);
