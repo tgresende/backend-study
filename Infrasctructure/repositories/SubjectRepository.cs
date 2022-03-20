@@ -19,6 +19,11 @@ namespace Infrasctructure.repositories
 
         public Task<List<Subject>> GetSubjects(int projectId) => 
             _context.Subjects.Where(sub=> sub.Project.ProjectId == projectId).ToListAsync();
+
+        public async Task AddSubject(Subject subject)
+        {
+            await _context.Subjects.AddAsync(subject);
+        }
             
     }
 }

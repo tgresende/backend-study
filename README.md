@@ -9,3 +9,6 @@
 - Aplicar mudancas no banco
 - executar script no na raiz da solucao
 - dotnet ef --startup-project WebApi/ database update --project Infrasctructure/
+
+- Pendências
+- testar usecases

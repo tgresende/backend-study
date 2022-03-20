@@ -8,5 +8,10 @@ namespace Domain.entities
         public string Annotations { get; set; }
         public Project Project { get; set; }
 
+        public bool IsValid() => IsValidName() && IsValidWeight() && IsValidProjectParent();
+        public bool IsValidName() => Name.Trim().Length > 0;
+        public bool IsValidWeight() => Weight > 0;
+        public bool IsValidProjectParent() => Project != null;
+
     }
 }
