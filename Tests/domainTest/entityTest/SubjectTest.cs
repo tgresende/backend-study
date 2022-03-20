@@ -1,15 +1,24 @@
 using Domain.entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Tests.shared.entitiesTestFactory.subjects;
 
 namespace Tests.domainTest.entityTest
 {
     [TestClass]
     public class SubjectTest
     {
+
+        private readonly SubjectTestFactory _subjectFactory;
+
+        public SubjectTest()
+        {
+            _subjectFactory = new SubjectTestFactory();
+        }
+
         [TestMethod]
         public void IsValidShouldReturnFalse_InvalidName()
         {
-            var sub = CreateSubject();
+            var sub = _subjectFactory.GetCompleteSubject();
             
             sub.Name = "";
 
@@ -20,7 +29,7 @@ namespace Tests.domainTest.entityTest
         [TestMethod]
         public void IsValidShouldReturnFalse_InvalidWeight()
         {
-            var sub = CreateSubject();
+            var sub = _subjectFactory.GetCompleteSubject();
             
             sub.Weight = 0;
 
@@ -34,19 +43,8 @@ namespace Tests.domainTest.entityTest
         [TestMethod]
         public void IsValidShouldReturnFalse_InvalidProject()
         {
-            var sub = CreateSubject();
+            var sub = _subjectFactory.GetCompleteSubject();
             
-            sub.Project.ProjectId = 0;
-
-            Assert.IsFalse(sub.IsValid());
-
-
-            sub.Project.ProjectId = -1;
-
-            Assert.IsFalse(sub.IsValid());
-
-            sub = CreateSubject();
-
             sub.Project = null;
 
             Assert.IsFalse(sub.IsValid());
@@ -55,24 +53,10 @@ namespace Tests.domainTest.entityTest
         [TestMethod]
         public void IsValidShouldReturnTrue_ValidEntity()
         {
-            var sub = CreateSubject();
+            var sub = _subjectFactory.GetCompleteSubject();
             
             Assert.IsTrue(sub.IsValid());
         }
 
-        private static Subject CreateSubject()
-        {
-            return new Subject(){
-                SubjectId = 1,
-                Name = "subject name",
-                Weight = 1,
-                Annotations = "subject annotatios",
-                Project = new Project()
-                {
-                    ProjectId= 1,
-                    Name = "project name"
-                }
-            };
-        }
     }
 }

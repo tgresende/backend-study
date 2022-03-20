@@ -9,9 +9,9 @@ namespace Domain.entities
         public Project Project { get; set; }
 
         public bool IsValid() => IsValidName() && IsValidWeight() && IsValidProjectParent();
-        private bool IsValidName() => Name.Trim().Length > 0;
-        private bool IsValidWeight() => Weight > 0;
-        private bool IsValidProjectParent() => (Project != null && Project.ProjectId > 0);
+        public bool IsValidName() => Name.Trim().Length > 0;
+        public bool IsValidWeight() => Weight > 0;
+        public bool IsValidProjectParent() => Project != null;
 
     }
 }
