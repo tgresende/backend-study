@@ -30,8 +30,9 @@ namespace WebApi
 
             DependencyInjection.RegisterServices(services);
 
-
             services.AddMvc();
+            services.AddCors();
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -49,7 +50,10 @@ namespace WebApi
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApi v1"));
             }
 
-            app.UseHttpsRedirection();
+           // app.UseHttpsRedirection();
+
+            app.UseCors(option => option.AllowAnyOrigin());;
+
 
             app.UseRouting();
 
