@@ -30,9 +30,15 @@ namespace WebApi
 
             DependencyInjection.RegisterServices(services);
 
+            services.AddCors(options =>
+                options.AddPolicy("MyPolicy",
+                    builder => {
+                        builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+                    }
+                )
+            );
             services.AddMvc();
-            services.AddCors();
-
+            //services.AddCors();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -52,7 +58,8 @@ namespace WebApi
 
            // app.UseHttpsRedirection();
 
-            app.UseCors(option => option.AllowAnyOrigin());;
+            //app.UseCors(option => option.AllowAnyOrigin());;
+            app.UseCors("MyPolicy");
 
 
             app.UseRouting();

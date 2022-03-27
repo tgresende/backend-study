@@ -1,10 +1,10 @@
-using System;
-using System.Net.Mime;
 using Microsoft.Extensions.DependencyInjection;
 using Infrasctructure.repositories;
 using Domain.interfaces;
 using Apllication.useCases.subject.getSubjectUseCase;
 using Apllication.useCases.subject.addSubjectUseCase;
+using Apllication.useCases.topic.addTopicUseCase;
+
 
 namespace WebApi.DI
 {
@@ -18,8 +18,9 @@ namespace WebApi.DI
 
         private static void RegisterRepostioriesDI(IServiceCollection services)
         {
-            services.AddScoped<ISubjectRepository, SubjectRepository>();
             services.AddScoped<IProjectRepository, ProjectRepository>();
+            services.AddScoped<ISubjectRepository, SubjectRepository>();
+            services.AddScoped<ITopicRepository, TopicRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
 
@@ -27,7 +28,7 @@ namespace WebApi.DI
         {
             services.AddScoped<IGetSubjectUseCase, GetSubjectUseCase>();
             services.AddScoped<IAddSubjectUseCase, AddSubjectUseCase>();
-
+            services.AddScoped<IAddTopicUseCase, AddTopicUseCase>();
         }
 
     }
