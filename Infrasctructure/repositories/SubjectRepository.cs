@@ -27,6 +27,18 @@ namespace Infrasctructure.repositories
 
         public async Task<Subject> GetSubject(int subjectId) => 
             await _context.Subjects.FindAsync(subjectId);
-            
+
+        public async Task<List<Topic>> GetSubjectTopics(int subjectId)
+        {
+            var subject = await _context.Subjects
+            .Where(sub => sub.SubjectId == subjectId)
+            .Include(sub => sub.Topics)
+            .FirstOrDefaultAsync();
+
+            if (subject != null)
+                return subject.Topics;
+
+            return new List<Topic>();
+        }            
     }
 }
