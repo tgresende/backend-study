@@ -17,13 +17,16 @@ namespace Infrasctructure.repositories
             _context = context;
         }
 
-        public Task<List<Subject>> GetSubjects(int projectId) => 
-            _context.Subjects.Where(sub=> sub.Project.ProjectId == projectId).ToListAsync();
+        public async Task<List<Subject>> GetSubjects(int projectId) => 
+           await _context.Subjects.Where(sub=> sub.Project.ProjectId == projectId).ToListAsync();
 
         public async Task AddSubject(Subject subject)
         {
             await _context.Subjects.AddAsync(subject);
         }
+
+        public async Task<Subject> GetSubject(int subjectId) => 
+            await _context.Subjects.FindAsync(subjectId);
             
     }
 }

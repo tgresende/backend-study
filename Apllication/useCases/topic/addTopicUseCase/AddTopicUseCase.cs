@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Domain.interfaces;
 using Domain.entities;
+using Apllication.services.topic;
 
 namespace Apllication.useCases.topic.addTopicUseCase
 {
@@ -22,37 +23,34 @@ namespace Apllication.useCases.topic.addTopicUseCase
         {
             var subject = await _subjectRepository.GetSubject(requestModel.SubjectId);
 
-            var subject = new Subject(){
+            var topic = new Topic(){
                 Annotations = requestModel.Annotations,
                 Name = requestModel.Name,
-                Weight = requestModel.Weight,
-                Project = project
+                Subject = subject
             };
 
-            ValidateSubject(subject);
+            ValidateTopic(topic);
 
-            await _subjectRepository.AddSubject(subject);
+            await _topicRepository.AddTopic(topic);
 
             await _unitOfWork.SaveChanges();
 
-            return ParseToResponseModel(subject);
+            return ParseToResponseModel(topic);
         }
 
-        private void ValidateSubject(Subject sub)
+        private void ValidateTopic(Topic topic)
         {
-            if (!sub.IsValid())
+            if (!topic.IsValid())
             {
-                throw new exceptions.InvalidSubjectException(SubjectService.GetInvalidSubjectProperties(sub));
+                throw new exceptions.InvalidSubjectException(TopicService.GetInvalidTopicProperties(topic));
             }
         }
 
-        private AddSubjectUseCaseResponseModel ParseToResponseModel(Subject sub) =>
-            new AddSubjectUseCaseResponseModel(){
-                Annotations = sub.Annotations,
-                Name = sub.Name,
-                ProjectId = sub.Project.ProjectId,
-                SubjectId = sub.SubjectId,
-                Weight = sub.Weight
+        private AddTopicUseCaseResponseModel ParseToResponseModel(Topic topic) =>
+            new AddTopicUseCaseResponseModel(){
+                Annotations = topic.Annotations,
+                Name = topic.Name,
+                SubjectId = topic.Subject.SubjectId
             };
 
     }

@@ -14,11 +14,13 @@ namespace Infrasctructure.context
 
         public DbSet<Project> Projects { get; set; }
         public DbSet<Subject> Subjects { get; set; }
+        public DbSet<Topic> Topics { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             ProjectConfiguration.Configure(builder);
             SubjectConfiguration.Configure(builder);
+            TopicConfiguration.Configure(builder);
 
             base.OnModelCreating(builder);
         }
