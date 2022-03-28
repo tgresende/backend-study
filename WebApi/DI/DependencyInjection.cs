@@ -4,7 +4,7 @@ using Domain.interfaces;
 using Apllication.useCases.subject.getSubjectUseCase;
 using Apllication.useCases.subject.addSubjectUseCase;
 using Apllication.useCases.topic.addTopicUseCase;
-
+using Apllication.useCases.topic.getSubjectTopicsUseCase;
 
 namespace WebApi.DI
 {
@@ -29,6 +29,8 @@ namespace WebApi.DI
             services.AddScoped<IGetSubjectUseCase, GetSubjectUseCase>();
             services.AddScoped<IAddSubjectUseCase, AddSubjectUseCase>();
             services.AddScoped<IAddTopicUseCase, AddTopicUseCase>();
+            services.AddScoped<IGetSubjectTopicsUseCase, GetSubjectTopicsUseCase>();
+
         }
 
     }

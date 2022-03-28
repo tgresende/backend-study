@@ -10,6 +10,7 @@ namespace Domain.interfaces
         public Task<List<Subject>> GetSubjects(int projectId);
         public Task AddSubject(Subject subject);
         public Task<Subject> GetSubject(int subjectId);
+        public Task<List<Topic>> GetSubjectTopics(int subjectId);
 
     }
 }
