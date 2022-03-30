@@ -9,8 +9,7 @@ namespace Domain.entities
         public string Annotations { get; set; }
         public Project Project { get; set; }
         public List<Topic> Topics { get; set; }
-
-
+        public List<SubjectCycle> SubjectCycles { get; set; }
         public bool IsValid() => IsValidName() && IsValidWeight() && IsValidProjectParent();
         public bool IsValidName() => Name.Trim().Length > 0;
         public bool IsValidWeight() => Weight > 0;

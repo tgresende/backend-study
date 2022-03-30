@@ -9,13 +9,19 @@ namespace Apllication.useCases.subject.addSubjectUseCase
     {
         private readonly ISubjectRepository _subjectRepository;
         private readonly IProjectRepository _projectRepository;
+
+        private readonly ISubjectService _subjectService;
+
         private readonly IUnitOfWork _unitOfWork;
 
-        public AddSubjectUseCase(ISubjectRepository subjectRepository, IProjectRepository projectRepository,
+        public AddSubjectUseCase(ISubjectRepository subjectRepository, 
+        IProjectRepository projectRepository,
+        ISubjectService subjectService,
         IUnitOfWork unitOfWork)
         {
             _subjectRepository = subjectRepository;
             _projectRepository = projectRepository;
+            _subjectService = subjectService;
             _unitOfWork = unitOfWork;
         }
 
@@ -43,7 +49,7 @@ namespace Apllication.useCases.subject.addSubjectUseCase
         {
             if (!sub.IsValid())
             {
-                throw new exceptions.InvalidSubjectException(SubjectService.GetInvalidSubjectProperties(sub));
+                throw new exceptions.InvalidSubjectException(_subjectService.GetInvalidSubjectProperties(sub));
             }
         }
 
