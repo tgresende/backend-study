@@ -6,6 +6,7 @@ using Apllication.services.project;
 using Apllication.useCases.subject.getSubjectUseCase;
 using Apllication.useCases.subject.addSubjectUseCase;
 using Apllication.useCases.subject.addSimpleSubjectCycleUseCase;
+using Apllication.useCases.subject.getSubjectCycleUseCase;
 using Apllication.useCases.topic.addTopicUseCase;
 using Apllication.useCases.topic.getSubjectTopicsUseCase;
 
@@ -38,7 +39,7 @@ namespace WebApi.DI
             services.AddScoped<IGetSubjectTopicsUseCase, GetSubjectTopicsUseCase>();
             services.AddScoped<IGetSubjectTopicsUseCase, GetSubjectTopicsUseCase>();
             services.AddScoped<IAddSimpleSubjectCycleUseCase, AddSimpleSubjectCycleUseCase>();
-
+            services.AddScoped<IGetSubjectCycleUseCase, GetSubjectCycleUseCase>();
         }
 
         private static void RegisterServicesDI(IServiceCollection services)
