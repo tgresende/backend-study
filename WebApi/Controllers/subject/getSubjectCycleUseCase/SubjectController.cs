@@ -16,6 +16,7 @@ namespace WebApi.Controllers.subject.getSubjectCycleUseCase
         }
 
         [HttpGet("GetSubjectCycle/{projectId}")]
+        [ProducesResponseType(typeof(GetSubjectCycleUseCaseResponseModel), 200)]
          public async Task<IActionResult> Get(int projectId)
         {
             var data = await _useCase.Execute(projectId);

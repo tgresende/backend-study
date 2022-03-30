@@ -19,6 +19,7 @@ namespace Infrasctructure.repositories
 
         public async Task<List<SubjectCycle>> GetSubjectCyclesByStatus(int projectId, SubjectCycleEnum.SubjectCycleStatus status) => 
            await _context.SubjectCycles
+                .Include(cycle => cycle.Subject)
                 .Where(sub=> sub.Subject.Project.ProjectId == projectId 
                     && sub.Status == status)
                 .ToListAsync();

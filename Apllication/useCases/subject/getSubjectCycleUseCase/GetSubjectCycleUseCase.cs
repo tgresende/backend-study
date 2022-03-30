@@ -18,10 +18,31 @@ namespace Apllication.useCases.subject.getSubjectCycleUseCase
             _subjectCycleRepository = subjectCycleRepository;
         }
 
-        public async Task<List<SubjectCycle>> Execute(int projectId)
+        public async Task<List<GetSubjectCycleUseCaseResponseModel>> Execute(int projectId)
         {
-            return await _subjectCycleRepository.GetSubjectCyclesByStatus(projectId, SubjectCycleEnum.SubjectCycleStatus.Ready);
+            var subjectsCycle = await _subjectCycleRepository.GetSubjectCyclesByStatus(projectId, SubjectCycleEnum.SubjectCycleStatus.Ready);
 
+            return ParseListToResponseModel(subjectsCycle);
         }
+
+        private List<GetSubjectCycleUseCaseResponseModel> ParseListToResponseModel(List<SubjectCycle> subjectsCycle)
+        {
+            List<GetSubjectCycleUseCaseResponseModel> result = new();
+            foreach(SubjectCycle cycleItem in subjectsCycle)
+            {
+                result.Add(ParseEntityToResponseModel(cycleItem));
+            }
+            return result;
+        }
+
+        private GetSubjectCycleUseCaseResponseModel ParseEntityToResponseModel(SubjectCycle subjectCycle) =>
+        new GetSubjectCycleUseCaseResponseModel{
+            status = subjectCycle.Status,
+            StudyTimeMinutes = subjectCycle.StudyTimeMinutes,
+            subjectCycleId = subjectCycle.SubjectCycleId,
+            SubjectId = subjectCycle.Subject.SubjectId,
+            SubjectName = subjectCycle.Subject.Name,
+        };
+
     }
 }
