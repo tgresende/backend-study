@@ -11,6 +11,8 @@ using Apllication.useCases.topic.addTopicUseCase;
 using Apllication.useCases.topic.getSubjectTopicsUseCase;
 using Apllication.useCases.topicCycle.getTopicCycleUseCase;
 using Apllication.useCases.topicCycle.addSimpleTopicCycleUseCase;
+using Apllication.useCases.question.addQuestionUseCase;
+
 
 
 namespace WebApi.DI
@@ -32,7 +34,7 @@ namespace WebApi.DI
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<ISubjectCycleRepository, SubjectCycleRepository>();
             services.AddScoped<ITopicCycleRepository, TopicCycleRepository>();
-
+            services.AddScoped<IQuestionRepository, QuestionRepository>();
         }
 
         private static void RegisterUseCasesDI(IServiceCollection services)
@@ -46,7 +48,7 @@ namespace WebApi.DI
             services.AddScoped<IGetSubjectCycleUseCase, GetSubjectCycleUseCase>();
             services.AddScoped<IGetTopicCycleUseCase, GetTopicCycleUseCase>();
             services.AddScoped<IAddSimpleTopicCycleUseCase, AddSimpleTopicCycleUseCase>();
-
+            services.AddScoped<IAddQuestionUseCase, AddQuestionUseCase>();
         }
 
         private static void RegisterServicesDI(IServiceCollection services)
