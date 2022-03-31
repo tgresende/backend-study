@@ -9,5 +9,7 @@ namespace Domain.interfaces
     {
         public Task AddTopic(Topic topic);
 
+        public Task<List<Topic>> GetTopics(int subjectId);
+
     }
 }

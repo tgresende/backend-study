@@ -16,6 +16,8 @@ namespace Infrasctructure.context
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<Topic> Topics { get; set; }
         public DbSet<SubjectCycle> SubjectCycles { get; set; }
+        public DbSet<TopicCycle> TopicCycles { get; set; }
+
 
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -24,6 +26,7 @@ namespace Infrasctructure.context
             SubjectConfiguration.Configure(builder);
             TopicConfiguration.Configure(builder);
             SubjectCycleConfiguration.Configure(builder);
+            TopicCycleConfiguration.Configure(builder);
 
             base.OnModelCreating(builder);
         }
