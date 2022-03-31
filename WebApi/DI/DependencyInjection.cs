@@ -9,6 +9,9 @@ using Apllication.useCases.subject.addSimpleSubjectCycleUseCase;
 using Apllication.useCases.subject.getSubjectCycleUseCase;
 using Apllication.useCases.topic.addTopicUseCase;
 using Apllication.useCases.topic.getSubjectTopicsUseCase;
+using Apllication.useCases.topicCycle.getTopicCycleUseCase;
+using Apllication.useCases.topicCycle.addSimpleTopicCycleUseCase;
+
 
 namespace WebApi.DI
 {
@@ -28,6 +31,7 @@ namespace WebApi.DI
             services.AddScoped<ITopicRepository, TopicRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<ISubjectCycleRepository, SubjectCycleRepository>();
+            services.AddScoped<ITopicCycleRepository, TopicCycleRepository>();
 
         }
 
@@ -40,6 +44,9 @@ namespace WebApi.DI
             services.AddScoped<IGetSubjectTopicsUseCase, GetSubjectTopicsUseCase>();
             services.AddScoped<IAddSimpleSubjectCycleUseCase, AddSimpleSubjectCycleUseCase>();
             services.AddScoped<IGetSubjectCycleUseCase, GetSubjectCycleUseCase>();
+            services.AddScoped<IGetTopicCycleUseCase, GetTopicCycleUseCase>();
+            services.AddScoped<IAddSimpleTopicCycleUseCase, AddSimpleTopicCycleUseCase>();
+
         }
 
         private static void RegisterServicesDI(IServiceCollection services)

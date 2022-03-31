@@ -99,6 +99,28 @@ namespace Infrasctructure.Migrations
                     b.ToTable("Topics");
                 });
 
+            modelBuilder.Entity("Domain.entities.TopicCycle", b =>
+                {
+                    b.Property<int>("TopicCycleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Score")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("TopicId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("TopicCycleId");
+
+                    b.HasIndex("TopicId");
+
+                    b.ToTable("TopicCycles");
+                });
+
             modelBuilder.Entity("Domain.entities.Subject", b =>
                 {
                     b.HasOne("Domain.entities.Project", "Project")
@@ -129,6 +151,16 @@ namespace Infrasctructure.Migrations
                     b.Navigation("Subject");
                 });
 
+            modelBuilder.Entity("Domain.entities.TopicCycle", b =>
+                {
+                    b.HasOne("Domain.entities.Topic", "Topic")
+                        .WithMany("TopicCycles")
+                        .HasForeignKey("TopicId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Topic");
+                });
+
             modelBuilder.Entity("Domain.entities.Project", b =>
                 {
                     b.Navigation("Subjects");
@@ -139,6 +171,11 @@ namespace Infrasctructure.Migrations
                     b.Navigation("SubjectCycles");
 
                     b.Navigation("Topics");
+                });
+
+            modelBuilder.Entity("Domain.entities.Topic", b =>
+                {
+                    b.Navigation("TopicCycles");
                 });
 #pragma warning restore 612, 618
         }
