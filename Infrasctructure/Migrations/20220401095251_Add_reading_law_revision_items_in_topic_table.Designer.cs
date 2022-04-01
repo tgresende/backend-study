@@ -3,14 +3,16 @@ using System;
 using Infrasctructure.context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Infrasctructure.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextConfigModelSnapshot : ModelSnapshot
+    [Migration("20220401095251_Add_reading_law_revision_items_in_topic_table")]
+    partial class Add_reading_law_revision_items_in_topic_table
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

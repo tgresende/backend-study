@@ -1,10 +1,11 @@
-namespace Apllication.useCases.question.addQuestionUseCase
+namespace Apllication.useCases.topic.getTopicAnnotationItemsUseCase
 {
-    public class AddQuestionUseCaseRequestModel
+    public class GetTopicAnnotationItemsUseCaseResponseModel
     {
         public int TopicId { get; set; }
-        public int CorrectQuestions {get; set;}
-        public int DoneQuestions {get; set;}
+        public string Name { get; set; }
+        public string Annotations { get; set; }
+        public int SubjectId { get; set; }
         public string revisionItem { get; set; }
         public string revisionCycle { get; set; }
         public string readingItem { get; set; }

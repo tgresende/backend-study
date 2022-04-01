@@ -1,16 +1,23 @@
 using Microsoft.Extensions.DependencyInjection;
 using Infrasctructure.repositories;
 using Domain.interfaces;
+
 using Apllication.services.subject;
+
 using Apllication.services.project;
+
 using Apllication.useCases.subject.getSubjectUseCase;
 using Apllication.useCases.subject.addSubjectUseCase;
 using Apllication.useCases.subject.addSimpleSubjectCycleUseCase;
 using Apllication.useCases.subject.getSubjectCycleUseCase;
+
 using Apllication.useCases.topic.addTopicUseCase;
 using Apllication.useCases.topic.getSubjectTopicsUseCase;
+using Apllication.useCases.topic.getTopicAnnotationItemsUseCase;
+
 using Apllication.useCases.topicCycle.getTopicCycleUseCase;
 using Apllication.useCases.topicCycle.addSimpleTopicCycleUseCase;
+
 using Apllication.useCases.question.addQuestionUseCase;
 
 
@@ -49,6 +56,7 @@ namespace WebApi.DI
             services.AddScoped<IGetTopicCycleUseCase, GetTopicCycleUseCase>();
             services.AddScoped<IAddSimpleTopicCycleUseCase, AddSimpleTopicCycleUseCase>();
             services.AddScoped<IAddQuestionUseCase, AddQuestionUseCase>();
+            services.AddScoped<IGetTopicAnnotationItemsUseCase, GetTopicAnnotationItemsUseCase>();
         }
 
         private static void RegisterServicesDI(IServiceCollection services)

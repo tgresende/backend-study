@@ -9,9 +9,7 @@ namespace Apllication.useCases.question.addQuestionUseCase
     {
         private readonly ITopicRepository _topicRepository;
         private readonly IQuestionRepository _questionRepository;
-
         private readonly IUnitOfWork _unitOfWork;
-
         public AddQuestionUseCase(
             ISubjectRepository subjectRepository, 
             ITopicRepository topicRepository,
@@ -30,6 +28,8 @@ namespace Apllication.useCases.question.addQuestionUseCase
             var question = CreateNewQuestion(requestModel, topic);
 
             ValidateQuestion(question);
+
+            var topicUpdated = UpdateTopic(topic, requestModel);
 
             await _questionRepository.AddQuestion(question);
 
@@ -51,7 +51,7 @@ namespace Apllication.useCases.question.addQuestionUseCase
                 CorrectQuestions = requestModel.CorrectQuestions,
                 DoneQuestions = requestModel.DoneQuestions,
                 Topic = topic,
-                Date = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds()
+                Date = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds(),
             };
             
 
@@ -61,6 +61,20 @@ namespace Apllication.useCases.question.addQuestionUseCase
             {
                 throw new exceptions.question.InvalidQuestionException("Questão com dados inválidos");
             }
+        }
+
+        private Topic UpdateTopic(Topic topic, AddQuestionUseCaseRequestModel requestModel)
+        {
+            var updatedTopic = topic;
+
+            updatedTopic.lawsCycle = requestModel.lawsCycle;
+            updatedTopic.lawsItem = requestModel.lawsItem;
+            updatedTopic.readingCycle = requestModel.readingCycle;
+            updatedTopic.readingItem = requestModel.readingItem;
+            updatedTopic.revisionCycle = requestModel.revisionCycle;
+            updatedTopic.revisionItem = requestModel.revisionItem;
+
+            return updatedTopic;
         }
     }
 }
