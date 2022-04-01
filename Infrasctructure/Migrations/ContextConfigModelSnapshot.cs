@@ -30,6 +30,31 @@ namespace Infrasctructure.Migrations
                     b.ToTable("Projects");
                 });
 
+            modelBuilder.Entity("Domain.entities.Question", b =>
+                {
+                    b.Property<int>("QuestionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("CorrectQuestions")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<long>("Date")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("DoneQuestions")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("TopicId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("QuestionId");
+
+                    b.HasIndex("TopicId");
+
+                    b.ToTable("Questions");
+                });
+
             modelBuilder.Entity("Domain.entities.Subject", b =>
                 {
                     b.Property<int>("SubjectId")
@@ -92,6 +117,24 @@ namespace Infrasctructure.Migrations
                     b.Property<int?>("SubjectId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("lawsCycle")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("lawsItem")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("readingCycle")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("readingItem")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("revisionCycle")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("revisionItem")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("TopicId");
 
                     b.HasIndex("SubjectId");
@@ -119,6 +162,16 @@ namespace Infrasctructure.Migrations
                     b.HasIndex("TopicId");
 
                     b.ToTable("TopicCycles");
+                });
+
+            modelBuilder.Entity("Domain.entities.Question", b =>
+                {
+                    b.HasOne("Domain.entities.Topic", "Topic")
+                        .WithMany("Questions")
+                        .HasForeignKey("TopicId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Topic");
                 });
 
             modelBuilder.Entity("Domain.entities.Subject", b =>
@@ -175,6 +228,8 @@ namespace Infrasctructure.Migrations
 
             modelBuilder.Entity("Domain.entities.Topic", b =>
                 {
+                    b.Navigation("Questions");
+
                     b.Navigation("TopicCycles");
                 });
 #pragma warning restore 612, 618

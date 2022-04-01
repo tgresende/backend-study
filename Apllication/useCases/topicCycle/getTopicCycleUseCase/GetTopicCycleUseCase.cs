@@ -35,7 +35,8 @@ namespace Apllication.useCases.topicCycle.getTopicCycleUseCase
         new GetTopicCycleUseCaseResponseModel{
             Score = topicCycle.Score,
             topicCycleId = topicCycle.TopicCycleId,
-            TopicName = topicCycle.Topic.Name
+            TopicName = topicCycle.Topic.Name,
+            topicId = topicCycle.Topic.TopicId,
         };
 
     }

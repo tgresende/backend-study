@@ -29,5 +29,12 @@ namespace Infrasctructure.repositories
                 .Where(topic => topic.Subject.SubjectId == subjectId)
                 .ToListAsync();;
         }
+
+        public async Task<Topic> GetTopic(int topicId) => 
+            await _context
+                .Topics
+                .Include(topic => topic.Subject)
+                .Where(topic => topic.TopicId == topicId)
+                .FirstOrDefaultAsync();
     }
 }
