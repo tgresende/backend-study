@@ -10,5 +10,8 @@ namespace Domain.interfaces
         public Task AddTopic(Topic topic);
         public Task<List<Topic>> GetTopics(int subjectId);
         public Task<Topic> GetTopic(int topicId);
+        public Task<List<Topic>> GetTopicsWithQuestions(int subjectId);
+
     }
+
 }

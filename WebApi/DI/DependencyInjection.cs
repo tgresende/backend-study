@@ -19,6 +19,7 @@ using Apllication.useCases.topic.getTopicAnnotationItemsUseCase;
 
 using Apllication.useCases.topicCycle.getTopicCycleUseCase;
 using Apllication.useCases.topicCycle.addSimpleTopicCycleUseCase;
+using Apllication.useCases.topicCycle.addOptimizedTopicCycleUseCase;
 
 using Apllication.useCases.question.addQuestionUseCase;
 
@@ -58,6 +59,8 @@ namespace WebApi.DI
             services.AddScoped<IAddQuestionUseCase, AddQuestionUseCase>();
             services.AddScoped<IGetTopicAnnotationItemsUseCase, GetTopicAnnotationItemsUseCase>();
             services.AddScoped<IFinalizeSubjectCycleUseCase, FinalizeSubjectCycleUseCase>();
+            services.AddScoped<IAddOptimizedTopicCycleUseCase, AddOptimizedTopicCycleUseCase>();
+
         }
 
         private static void RegisterServicesDI(IServiceCollection services)

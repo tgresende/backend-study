@@ -30,6 +30,14 @@ namespace Infrasctructure.repositories
                 .ToListAsync();;
         }
 
+        public async Task<List<Topic>> GetTopicsWithQuestions(int subjectId)
+        {
+            return await _context.Topics
+                .Include(topic => topic.Questions)
+                .Where(topic => topic.Subject.SubjectId == subjectId)
+                .ToListAsync();;
+        }
+
         public async Task<Topic> GetTopic(int topicId) => 
             await _context
                 .Topics
