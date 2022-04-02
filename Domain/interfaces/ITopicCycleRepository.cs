@@ -9,6 +9,8 @@ namespace Domain.interfaces
     {
         public Task<List<TopicCycle>> GetTopicCycleBySubjectAndStatus(int subjectId, TopicCycleEnum.TopicCycleEnumStatus status);
         public Task AddTopicCycle(TopicCycle topicCycle);
+        public Task<TopicCycle> GetTopicCycle(int topicCycle);
+
 
     }
 }
