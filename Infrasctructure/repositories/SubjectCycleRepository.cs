@@ -29,5 +29,10 @@ namespace Infrasctructure.repositories
             await _context.SubjectCycles.AddAsync(subjectCycle);
         }
 
+        public async Task<SubjectCycle> GetSubjectCycle(int subjectCycleId) =>
+            await _context.SubjectCycles
+                .FindAsync(subjectCycleId);
+
+
     }
 }
