@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Domain.entities;
 using Domain.dtos.topic;
 using Domain.interfaces;
+using Domain.enums;
 using System.Linq;
 
 
@@ -13,6 +14,8 @@ namespace Apllication.useCases.topicCycle.addOptimizedTopicCycleUseCase
         private readonly ITopicCycleRepository _topicCycleRepository;
         private readonly ITopicRepository _topicRepository;
         private readonly IUnitOfWork _unitOfWork;
+
+        private const int periodToCalcScoreQuestionInDays = 15;
 
         public AddOptimizedTopicCycleUseCase(ITopicCycleRepository topicCycleRepository,
             ITopicRepository topicRepository,
@@ -53,42 +56,49 @@ namespace Apllication.useCases.topicCycle.addOptimizedTopicCycleUseCase
 
             foreach(Topic topic in topics)
             {
-                topicsDto.Add(topic.CalcScore());
+                topicsDto.Add(topic.CalcScore(periodToCalcScoreQuestionInDays));
             }
 
-            topicsDto.Sort((x, y) => y.Media.CompareTo(x.Media));
+            var listScoreA = topicsDto.FindAll(topic => topic.Score == TopicCycleEnum.TopicCycleEnumScore.A);
+            listScoreA.Sort((x, y) => y.Media.CompareTo(x.Media));
+
+            var listScoreBC = topicsDto.FindAll(topic => topic.Score != TopicCycleEnum.TopicCycleEnumScore.A);
+            listScoreBC.Sort((x, y) => y.Media.CompareTo(x.Media));
 
             var topicsCycle = new List<TopicCycle>();
 
-            var countTopicsBCInserted = 0;
+            TopicCycleEnum.Action lastActionBC =  TopicCycleEnum.Action.Law;
+           
+            if (listScoreBC.Count > 0){
+                lastActionBC = listScoreBC.First().topic.GetLastAction();
+            }
 
-            foreach(TopicScoreInfoDTO dto in topicsDto)
+            foreach(TopicScoreInfoDTO topicA in listScoreA)
             {
-                if (countTopicsBCInserted == 2)
-                    return topicsCycle;
-
-                if (dto.Score == TopicCycleEnum.TopicCycleEnumScore.A)
-                {
-                    topicsCycle.Add(ConvertDtoToEntity(dto));
-                    continue;
-                }
-
-                if (countTopicsBCInserted < 2)
-                {
-                    topicsCycle.Add(ConvertDtoToEntity(dto));
-                    countTopicsBCInserted++;
-                    continue;
+                topicsCycle.Add(ConvertDtoToEntity(topicA, topicA.topic.GetLastAction()));
+                
+                if (listScoreBC.Count > 0){
+                    topicsCycle.Add(ConvertDtoToEntity(listScoreBC.First(), lastActionBC));
+                    lastActionBC = GetNextActionByScore(lastActionBC, listScoreBC.First().Score);
                 }
             }
 
+            if (topicsCycle.Count == 0){
+                topicsCycle.Add(ConvertDtoToEntity(listScoreBC.First(), lastActionBC));
+            }
+
+            if (listScoreBC.Count >= 2){
+                topicsCycle.Add(ConvertDtoToEntity(listScoreBC.ElementAt(1), listScoreBC.ElementAt(1).topic.GetLastAction()));
+            }
             return topicsCycle;
         }
 
-        private TopicCycle ConvertDtoToEntity(TopicScoreInfoDTO dto) =>
+        private TopicCycle ConvertDtoToEntity(TopicScoreInfoDTO dto, TopicCycleEnum.Action lastAction) =>
             new TopicCycle{
                 Score = dto.Score,
                 Status = TopicCycleEnum.TopicCycleEnumStatus.Ready,
                 Topic = dto.topic,
+                Action = GetNextActionByScore(lastAction, dto.Score)
             };
 
         private async Task PersistTopicsCycle(List<TopicCycle> topicsCycle)
@@ -99,6 +109,70 @@ namespace Apllication.useCases.topicCycle.addOptimizedTopicCycleUseCase
             }
         }
 
+        private TopicCycleEnum.Action GetNextActionByScore(
+            TopicCycleEnum.Action lastAction, 
+            TopicCycleEnum.TopicCycleEnumScore score
+        )
+        {
+            if (score == TopicCycleEnum.TopicCycleEnumScore.A)
+                return GetNextActionA(lastAction);
+            if (score == TopicCycleEnum.TopicCycleEnumScore.B)
+                return GetNextActionB(lastAction);
+            return GetNextActionC(lastAction);
+        }
+
+        private TopicCycleEnum.Action GetNextActionA(TopicCycleEnum.Action lastAction)
+        {
+            switch(lastAction)
+            {
+                case TopicCycleEnum.Action.Exercises:
+                case TopicCycleEnum.Action.ExercisesTwo:
+                    return TopicCycleEnum.Action.Revision;
+                case TopicCycleEnum.Action.Revision:
+                    return TopicCycleEnum.Action.Law;
+                case TopicCycleEnum.Action.Law:
+                    return TopicCycleEnum.Action.Reading;
+                case TopicCycleEnum.Action.Reading:
+                    return TopicCycleEnum.Action.Exercises;
+                default:
+                    return TopicCycleEnum.Action.Reading;
+            }
+        }
+
+        private TopicCycleEnum.Action GetNextActionB(TopicCycleEnum.Action lastAction)
+        {
+            switch(lastAction)
+            {
+                case TopicCycleEnum.Action.Exercises:
+                    return TopicCycleEnum.Action.Revision;
+                case TopicCycleEnum.Action.Revision:
+                    return TopicCycleEnum.Action.ExercisesTwo;
+                case TopicCycleEnum.Action.ExercisesTwo:
+                    return TopicCycleEnum.Action.Reading;
+                case TopicCycleEnum.Action.Reading:
+                    return TopicCycleEnum.Action.Exercises;
+                case TopicCycleEnum.Action.Law:
+                default:
+                    return TopicCycleEnum.Action.Reading;
+            }
+        }
+
+        private TopicCycleEnum.Action GetNextActionC(TopicCycleEnum.Action lastAction)
+        {
+            switch(lastAction)
+            {
+                case TopicCycleEnum.Action.Exercises:
+                case TopicCycleEnum.Action.ExercisesTwo:
+                    return TopicCycleEnum.Action.Revision;
+                case TopicCycleEnum.Action.Revision:
+                    return TopicCycleEnum.Action.Reading;
+                case TopicCycleEnum.Action.Reading:
+                    return TopicCycleEnum.Action.Exercises;
+                case TopicCycleEnum.Action.Law:
+                default:
+                    return TopicCycleEnum.Action.Reading;
+            }
+        }
 
        
 

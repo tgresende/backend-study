@@ -1,5 +1,4 @@
-using System.Collections.Generic;
-namespace Domain.entities
+namespace Domain.enums
 {
     public static class SubjectCycleEnum
     {

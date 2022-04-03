@@ -1,4 +1,4 @@
-using Domain.entities;
+using Domain.enums;
 namespace Apllication.useCases.subject.getSubjectCycleUseCase
 {
     public class GetSubjectCycleUseCaseResponseModel

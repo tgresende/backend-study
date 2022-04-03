@@ -9,8 +9,6 @@ namespace Apllication.useCases.topic.getTopicAnnotationItemsUseCase
     {
         private readonly ISubjectRepository _subjectRepository;
         private readonly ITopicRepository _topicRepository;
-        private readonly IUnitOfWork _unitOfWork;
-
         public GetTopicAnnotationItemsUseCase(
             ISubjectRepository subjectRepository, 
             ITopicRepository topicRepository

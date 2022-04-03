@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Domain.entities;
 using Domain.interfaces;
+using Domain.enums;
 
 
 namespace Apllication.useCases.topicCycle.addSimpleTopicCycleUseCase

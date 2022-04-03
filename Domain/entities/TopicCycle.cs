@@ -1,3 +1,5 @@
+using Domain.enums;
+
 namespace Domain.entities
 {
     public class TopicCycle
@@ -6,5 +8,7 @@ namespace Domain.entities
         public TopicCycleEnum.TopicCycleEnumStatus Status { get; set; }
         public Topic Topic {get;set;}
         public TopicCycleEnum.TopicCycleEnumScore Score {get;set;}
+        public TopicCycleEnum.Action Action {get;set;}
+
     }
 }

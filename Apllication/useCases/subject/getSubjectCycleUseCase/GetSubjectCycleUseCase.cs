@@ -2,9 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Domain.interfaces;
 using Domain.entities;
-using Apllication.services.project;
-using Apllication.services.subject;
-
+using Domain.enums;
 
 namespace Apllication.useCases.subject.getSubjectCycleUseCase
 {

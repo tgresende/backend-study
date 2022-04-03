@@ -1,4 +1,5 @@
 using Domain.entities;
+using Domain.enums;
 
 namespace Domain.dtos.topic
 {

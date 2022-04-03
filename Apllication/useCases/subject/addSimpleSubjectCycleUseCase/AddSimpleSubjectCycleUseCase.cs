@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Domain.interfaces;
 using Domain.entities;
+using Domain.enums;
 using Apllication.services.project;
 using Apllication.services.subject;
 

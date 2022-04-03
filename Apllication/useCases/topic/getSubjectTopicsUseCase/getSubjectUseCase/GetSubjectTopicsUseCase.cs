@@ -7,15 +7,20 @@ namespace Apllication.useCases.topic.getSubjectTopicsUseCase
 {
     public class GetSubjectTopicsUseCase : IGetSubjectTopicsUseCase
     {
-        private readonly ISubjectRepository _subjectRepository;
+        private readonly ITopicRepository _topicRepository;
 
-        public GetSubjectTopicsUseCase(ISubjectRepository subjectRepository)
+        public GetSubjectTopicsUseCase(ITopicRepository topicRepository)
         {
-           _subjectRepository = subjectRepository;
+           _topicRepository = topicRepository;
         }
         public async Task<List<GetSubjectTopicsUseCaseResponseModel>> Execute(int subjectId) {
-            var topics = await _subjectRepository.GetSubjectTopics(subjectId);
-            return ConvertSubjectsListToResponseModel(topics);
+            var topics = await _topicRepository.GetTopicsWithQuestions(subjectId);
+            
+            var topicDTO = ConvertSubjectsListToResponseModel(topics);
+
+            topicDTO.Sort((x, y) => y.Media.CompareTo(x.Media));
+
+            return topicDTO;
         }
 
         public List<GetSubjectTopicsUseCaseResponseModel> ConvertSubjectsListToResponseModel(List<Topic> topics)
@@ -28,12 +33,21 @@ namespace Apllication.useCases.topic.getSubjectTopicsUseCase
             return responseList;
         }
 
-        public GetSubjectTopicsUseCaseResponseModel ConvertTopicResponseModel(Topic topic) =>
-            new GetSubjectTopicsUseCaseResponseModel{
+        public GetSubjectTopicsUseCaseResponseModel ConvertTopicResponseModel(Topic topic){
+            int daysOldToCalcScore = 15;
+            
+            var scoreDto = topic.CalcScore(daysOldToCalcScore);
+            
+            return new GetSubjectTopicsUseCaseResponseModel{
                 Annotations= topic.Annotations,
                 Name = topic.Name,
                 TopicId = topic.TopicId,
+                Media = scoreDto.Media,
+                Score = scoreDto.Score
             };
+
+        }
+            
         
     }
 }

@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Domain.enums;
+
 namespace Domain.entities
 {
     public class SubjectCycle

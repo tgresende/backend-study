@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Domain.interfaces;
 using Domain.entities;
-
+using Domain.enums;
 
 namespace Apllication.useCases.topicCycle.getTopicCycleUseCase
 {
@@ -37,6 +37,7 @@ namespace Apllication.useCases.topicCycle.getTopicCycleUseCase
             topicCycleId = topicCycle.TopicCycleId,
             TopicName = topicCycle.Topic.Name,
             topicId = topicCycle.Topic.TopicId,
+            Action = topicCycle.Action
         };
 
     }

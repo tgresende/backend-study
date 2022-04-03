@@ -1,7 +1,10 @@
 using System.Linq;
 using System.Collections.Generic;
-using Domain.dtos.topic
-;
+using Domain.dtos.topic;
+using Domain.utils;
+using Domain.enums;
+
+
 namespace Domain.entities
 {
     public class Topic
@@ -23,18 +26,24 @@ namespace Domain.entities
         public bool IsValid() => IsValidName() && IsValidPSubjectParent();
         public bool IsValidName() => Name.Trim().Length > 0;
         public bool IsValidPSubjectParent() => Subject != null;
-        public TopicScoreInfoDTO CalcScore()
+        public TopicScoreInfoDTO CalcScore(int lastDays)
         {
             int correctQuestion = 0;
             int doneQuestion = 0;
 
-            foreach(Question question in Questions)
+            var lastDayBeforeNow = DateUtils.GetDayBeforeNowTimestamp(lastDays);
+
+            var lastQuestions = Questions.FindAll(question => question.Date >= lastDayBeforeNow);
+
+            foreach(Question question in lastQuestions)
             {
                 doneQuestion+=question.DoneQuestions;
                 correctQuestion+=question.CorrectQuestions;
             }
 
-            int media = correctQuestion*100/doneQuestion;
+            int media = 0;
+            if (doneQuestion >0)
+                media = correctQuestion*100/doneQuestion;
 
             return new TopicScoreInfoDTO{
                 Media= media,
@@ -44,8 +53,6 @@ namespace Domain.entities
                 topic = this
             };
         }
-           
-
         private TopicCycleEnum.TopicCycleEnumScore GetScoreAbc(int media)
         {
             if (media < 60)
@@ -56,6 +63,15 @@ namespace Domain.entities
 
             return TopicCycleEnum.TopicCycleEnumScore.A;
         }
+
+        public TopicCycleEnum.Action GetLastAction()
+        {
+            if (TopicCycles.Any())
+                return TopicCycles.Last().Action;
+
+            return TopicCycleEnum.Action.Law;
+        }
+
 
 
     }

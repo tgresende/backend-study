@@ -34,6 +34,7 @@ namespace Infrasctructure.repositories
         {
             return await _context.Topics
                 .Include(topic => topic.Questions)
+                .Include(topic => topic.TopicCycles)
                 .Where(topic => topic.Subject.SubjectId == subjectId)
                 .ToListAsync();;
         }

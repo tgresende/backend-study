@@ -1,5 +1,4 @@
-using System.Collections.Generic;
-namespace Domain.entities
+namespace Domain.enums
 {
     public static class TopicCycleEnum
     {
@@ -12,6 +11,14 @@ namespace Domain.entities
             A,
             B,
             C,
+        }
+
+        public enum Action{
+            Reading,
+            Law,
+            Exercises,
+            ExercisesTwo,
+            Revision,
         }
 
     }

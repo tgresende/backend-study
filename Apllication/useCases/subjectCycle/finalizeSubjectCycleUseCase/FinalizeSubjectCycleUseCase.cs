@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Domain.interfaces;
 using Domain.entities;
+using Domain.enums;
 
 
 namespace Apllication.useCases.subjectCycle.finalizeSubjectCycleUseCase
