@@ -53,9 +53,10 @@ namespace Apllication.useCases.topicCycle.addSimpleTopicCycleUseCase
             foreach(Topic topic in topics)
             {
                 topicsCycle.Add(new TopicCycle{
-                    Score = TopicCycleEnum.TopicCycleEnumScore.A,
+                    Score = TopicCycleEnum.TopicCycleEnumScore.B,
                     Status = TopicCycleEnum.TopicCycleEnumStatus.Ready,
-                    Topic = topic
+                    Topic = topic,
+                    Action = TopicCycleEnum.Action.Exercises
                 });
 
             }
